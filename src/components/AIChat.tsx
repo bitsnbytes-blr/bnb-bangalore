@@ -3,7 +3,7 @@
 import { useChat } from "@ai-sdk/react";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Terminal, X, Send, Cpu } from "lucide-react";
+import { Terminal, X, Send, Cpu, Maximize2, Minimize2, Minus } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 
 export function AIChat() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const { messages, sendMessage, status } = useChat();
   const isLoading = status === "streaming" || status === "submitted";
   const [input, setInput] = useState("");
@@ -60,20 +61,33 @@ export function AIChat() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed bottom-24 right-6 z-50 w-[380px] max-w-[calc(100vw-3rem)] h-[600px] max-h-[calc(100vh-8rem)] flex flex-col bg-[#050505]/95 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
+            className={cn(
+              "fixed z-50 flex flex-col bg-[#050505]/95 backdrop-blur-xl border border-white/10 overflow-hidden shadow-2xl transition-all duration-300",
+              isFullscreen 
+                ? "bottom-0 right-0 w-screen h-screen max-h-screen max-w-none rounded-none" 
+                : "bottom-24 right-6 w-[380px] max-w-[calc(100vw-3rem)] h-[600px] max-h-[calc(100vh-8rem)] rounded-2xl"
+            )}
           >
             {/* Header */}
             <div className="flex items-center gap-3 p-4 border-b border-white/10 bg-black/50">
               <div className="w-8 h-8 rounded bg-blood/10 border border-blood/20 flex items-center justify-center shrink-0">
                 <Terminal className="w-4 h-4 text-blood" />
               </div>
-              <div>
-                <h3 className="font-heading font-bold text-white text-sm">System Link</h3>
+              <div className="flex-1">
+                <h3 className="font-heading font-bold text-white text-sm">Avacadooh System</h3>
                 <p className="font-mono text-[10px] text-ash/50 uppercase tracking-widest">
                   Secure Channel
                 </p>
               </div>
-              <div className="ml-auto w-2 h-2 rounded-full bg-blood animate-pulse shadow-[0_0_10px_rgba(255,0,0,0.5)]" />
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-blood animate-pulse shadow-[0_0_10px_rgba(255,0,0,0.5)]" />
+                <button onClick={() => setIsFullscreen(!isFullscreen)} className="text-ash hover:text-white transition-colors">
+                  {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+                </button>
+                <button onClick={() => setIsOpen(false)} className="text-ash hover:text-white transition-colors">
+                  <Minus className="w-4 h-4" />
+                </button>
+              </div>
             </div>
 
             {/* Messages */}

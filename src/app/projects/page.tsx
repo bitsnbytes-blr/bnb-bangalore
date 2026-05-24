@@ -14,7 +14,7 @@ export default function Projects() {
       tags: ["AI/ML", "TypeScript", "Routing"],
       links: {
         website: "https://manshverse.site",
-        github: "https://github.com/sparshsharma-dev"
+        github: "https://github.com/sparshsharma-dev/manshverse-web"
       }
     },
     {
@@ -24,7 +24,7 @@ export default function Projects() {
       tags: ["WebGL", "Three.js", "Math"],
       links: {
         website: "https://orbitvoyage.vercel.app",
-        github: "https://github.com/sparshsharma-dev"
+        github: "https://github.com/sparshsharma-dev/OrbitVoyage"
       }
     },
     {
@@ -34,7 +34,7 @@ export default function Projects() {
       tags: ["Vanilla JS", "Node.js", "NLP"],
       links: {
         website: "https://lexivoid.vercel.app",
-        github: "https://github.com/sparshsharma-dev"
+        github: "https://github.com/sparshsharma-dev/Lexivoid"
       }
     },
     {
