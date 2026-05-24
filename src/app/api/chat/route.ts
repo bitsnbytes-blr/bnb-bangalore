@@ -47,9 +47,10 @@ export async function POST(req: Request) {
     });
 
     return result.toTextStreamResponse();
-  } catch (error: any) {
+  } catch (error) {
     console.error("AI Error:", error);
-    return new Response(JSON.stringify({ error: error.message || "An error occurred." }), {
+    const err = error as Error;
+    return new Response(JSON.stringify({ error: err.message || "An error occurred." }), {
       status: 500,
       headers: { "Content-Type": "application/json" }
     });
