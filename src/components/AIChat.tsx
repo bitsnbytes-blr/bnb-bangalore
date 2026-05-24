@@ -3,7 +3,7 @@
 import { useChat } from "@ai-sdk/react";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Terminal, X, Send, Cpu, Maximize2, Minimize2, Minus } from "lucide-react";
+import { Terminal, X, Send, Cpu, Maximize2, Minimize2, Minus, Mic } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
@@ -62,30 +62,24 @@ export function AIChat() {
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className={cn(
-              "fixed z-50 flex flex-col bg-[#050505]/95 backdrop-blur-xl border border-white/10 overflow-hidden shadow-2xl transition-all duration-300",
+              "fixed z-50 flex flex-col bg-[#0a0a0a] border border-white/10 overflow-hidden shadow-2xl transition-all duration-300",
               isFullscreen 
-                ? "bottom-0 right-0 w-screen h-screen max-h-screen max-w-none rounded-none" 
-                : "bottom-24 right-6 w-[380px] max-w-[calc(100vw-3rem)] h-[600px] max-h-[calc(100vh-8rem)] rounded-2xl"
+                ? "inset-0 w-screen h-screen max-h-screen max-w-none rounded-none" 
+                : "bottom-20 right-4 md:bottom-24 md:right-6 w-[calc(100vw-2rem)] md:w-[400px] h-[600px] max-h-[calc(100vh-6rem)] rounded-2xl"
             )}
           >
             {/* Header */}
-            <div className="flex items-center gap-3 p-4 border-b border-white/10 bg-black/50">
-              <div className="w-8 h-8 rounded bg-blood/10 border border-blood/20 flex items-center justify-center shrink-0">
-                <Terminal className="w-4 h-4 text-blood" />
-              </div>
+            <div className="flex items-center gap-3 p-4 border-b border-white/5 bg-transparent">
+              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <div className="flex-1">
-                <h3 className="font-heading font-bold text-white text-sm">Avacadooh System</h3>
-                <p className="font-mono text-[10px] text-ash/50 uppercase tracking-widest">
-                  Secure Channel
-                </p>
+                <h3 className="font-heading font-bold text-white text-sm">Avacadooh</h3>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-blood animate-pulse shadow-[0_0_10px_rgba(255,0,0,0.5)]" />
                 <button onClick={() => setIsFullscreen(!isFullscreen)} className="text-ash hover:text-white transition-colors">
                   {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
                 </button>
                 <button onClick={() => setIsOpen(false)} className="text-ash hover:text-white transition-colors">
-                  <Minus className="w-4 h-4" />
+                  <X className="w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -93,11 +87,23 @@ export function AIChat() {
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-6">
               {messages.length === 0 && (
-                <div className="h-full flex flex-col items-center justify-center text-center space-y-4 opacity-50">
-                  <Cpu className="w-12 h-12 text-ash" />
-                  <p className="font-mono text-sm text-ash max-w-[200px]">
-                    System initialized. State your inquiry.
-                  </p>
+                <div className="flex flex-col space-y-3 mt-2">
+                  <p className="text-sm text-ash mb-2">Ask about our team, hackathons, or how to get involved.</p>
+                  
+                  {[
+                    "Who founded Bits&Bytes and what are they working on?",
+                    "What makes Bits&Bytes different from other tech clubs?",
+                    "How can I join Bits&Bytes as a student developer?",
+                    "Generate a cool sci-fi robot concept for me! 🤖"
+                  ].map((suggestion, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setInput(suggestion)}
+                      className="text-left w-fit px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs transition-colors"
+                    >
+                      {suggestion}
+                    </button>
+                  ))}
                 </div>
               )}
               
@@ -151,21 +157,26 @@ export function AIChat() {
             </div>
 
             {/* Input Form */}
-            <form onSubmit={handleSubmit} className="p-4 border-t border-white/10 bg-black/50">
+            <form onSubmit={handleSubmit} className="p-4 bg-[#0a0a0a]">
               <div className="relative flex items-center">
                 <input
                   value={input}
                   onChange={handleInputChange}
-                  placeholder="Transmit message..."
-                  className="w-full bg-white/5 border border-white/10 rounded-full py-3 pl-5 pr-12 text-sm text-white placeholder:text-ash/50 focus:outline-none focus:border-blood/30 focus:ring-1 focus:ring-blood/30 font-mono transition-all"
+                  placeholder="Ask anything..."
+                  className="w-full bg-white/5 border border-white/10 rounded-3xl py-3 pl-4 pr-20 text-sm text-white placeholder:text-ash/50 focus:outline-none focus:border-white/20 transition-all"
                 />
-                <button
-                  type="submit"
-                  disabled={isLoading || !input.trim()}
-                  className="absolute right-2 p-2 rounded-full bg-white/10 text-white hover:bg-blood hover:text-white transition-colors disabled:opacity-50 disabled:hover:bg-white/10"
-                >
-                  <Send className="w-4 h-4" />
-                </button>
+                <div className="absolute right-2 flex items-center gap-2">
+                  <button type="button" className="p-2 text-ash hover:text-white transition-colors">
+                    <Mic className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isLoading || !input.trim()}
+                    className="p-2 rounded-full bg-blood text-white hover:bg-red-700 transition-colors disabled:opacity-50 flex items-center justify-center"
+                  >
+                    <Send className="w-4 h-4 ml-0.5" />
+                  </button>
+                </div>
               </div>
             </form>
           </motion.div>
