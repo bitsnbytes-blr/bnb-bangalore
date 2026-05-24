@@ -1,12 +1,13 @@
-import { createMistral } from '@ai-sdk/mistral';
+import { createOpenAI } from '@ai-sdk/openai';
 import { streamText } from 'ai';
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
 export const runtime = 'edge';
 
-const mistral = createMistral({
-  apiKey: process.env.MISTRAL_API_KEY || '',
+const zai = createOpenAI({
+  baseURL: 'https://api.z.ai/api/paas/v4',
+  apiKey: process.env.ZAI_API_KEY || '',
 });
 
 const systemPrompt = `
@@ -41,7 +42,7 @@ export async function POST(req: Request) {
     const { messages } = await req.json();
 
     const result = await streamText({
-      model: mistral('mistral-large-latest'),
+      model: zai('glm-4.7'),
       system: systemPrompt,
       messages,
     });

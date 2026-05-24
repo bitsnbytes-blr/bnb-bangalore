@@ -148,7 +148,10 @@ export function AIChat() {
             <div className="flex items-center gap-3 p-4 border-b border-white/5 bg-transparent shrink-0">
               <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <div className="flex-1">
-                <h3 className="font-heading font-bold text-white text-sm">Avacadooh</h3>
+                <h3 className="font-heading font-bold text-white text-sm leading-none mb-1">Avacadooh</h3>
+                <p className="font-mono text-[9px] text-ash/40 uppercase tracking-widest leading-none">
+                  Sponsored by <span className="text-blood/80">z.ai</span>
+                </p>
               </div>
               <div className="flex items-center gap-3">
                 <button onClick={() => setIsFullscreen(!isFullscreen)} className="text-ash hover:text-white transition-colors">
