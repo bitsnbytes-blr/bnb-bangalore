@@ -76,18 +76,6 @@ export default function Team() {
       },
     },
     {
-      name: "Narthan Shetty",
-      role: "Design & Editing",
-      image: "/narthan.jpg",
-      imageClass: "object-center scale-125 group-hover:scale-[1.3]",
-      bio: "16-year-old self-taught editor, developer, and IT lead. From crafting school websites to building AI products from scratch.",
-      links: {
-        linkedin: "https://www.linkedin.com/in/narthan-shetty-7600b4411",
-        github: "https://github.com/speck-o5",
-        instagram: "https://www.instagram.com/srysly_shetty",
-      },
-    },
-    {
       name: "AH Deeyan",
       role: "Outreach",
       image: "/deeyan.jpg",
