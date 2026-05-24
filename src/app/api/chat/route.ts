@@ -42,7 +42,7 @@ export async function POST(req: Request) {
     const { messages } = await req.json();
 
     const result = await streamText({
-      model: zai('glm-4.7'),
+      model: zai.chat('glm-4.7'),
       system: systemPrompt,
       messages,
     });
