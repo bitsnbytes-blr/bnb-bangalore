@@ -1,8 +1,12 @@
-import { mistral } from '@ai-sdk/mistral';
+import { createMistral } from '@ai-sdk/mistral';
 import { streamText } from 'ai';
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
+
+const mistral = createMistral({
+  apiKey: process.env.MISTRAL_API_KEY || '',
+});
 
 const systemPrompt = `
 You are "Avacadooh", the central AI intelligence for "Bits & Bytes Bangalore" (bnb-web).
@@ -33,13 +37,21 @@ Keep answers concise, confident, and direct. No fluffy pleasantries.
 `;
 
 export async function POST(req: Request) {
-  const { messages } = await req.json();
+  try {
+    const { messages } = await req.json();
 
-  const result = streamText({
-    model: mistral('mistral-large-latest'),
-    system: systemPrompt,
-    messages,
-  });
+    const result = await streamText({
+      model: mistral('mistral-large-latest'),
+      system: systemPrompt,
+      messages,
+    });
 
-  return result.toTextStreamResponse();
+    return result.toTextStreamResponse();
+  } catch (error: any) {
+    console.error("AI Error:", error);
+    return new Response(JSON.stringify({ error: error.message || "An error occurred." }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" }
+    });
+  }
 }
