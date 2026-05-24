@@ -9,15 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/mistral": "^3.0.37",
+    "@ai-sdk/react": "^3.0.193",
+    "@mistralai/mistralai": "^2.2.1",
     "@react-three/drei": "^9.122.0",
     "@react-three/fiber": "^8.18.0",
     "@types/three": "^0.184.1",
+    "ai": "^6.0.191",
     "clsx": "^2.1.1",
     "framer-motion": "^12.40.0",
+    "katex": "^0.17.0",
     "lucide-react": "^1.16.0",
     "next": "14.2.35",
     "react": "^18",
     "react-dom": "^18",
+    "react-markdown": "^10.1.0",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
     "tailwind-merge": "^3.6.0",
     "three": "^0.184.0",
     "use-sound": "^5.0.0"

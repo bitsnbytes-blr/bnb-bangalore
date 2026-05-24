@@ -8,27 +8,11 @@ import { CalendarDays, MapPin } from "lucide-react";
 export default function Events() {
   const events = [
     {
-      name: "BLR Core V1 Initialization",
-      date: "June 15, 2026",
-      location: "WeWork Galaxy, Residency Rd",
-      description: "The inaugural assembly of the Bangalore fork. 50 hand-picked teen builders gathered to rewrite the rules of the local tech ecosystem.",
-      status: "COMPLETED",
-      image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=2000"
-    },
-    {
-      name: "Hackerspace Takeover",
-      date: "July 02, 2026",
-      location: "TBD - Bangalore",
-      description: "A 12-hour intensive sprint focused on hardware hacking and IoT infrastructure. Bring your own microcontrollers.",
-      status: "WAITLIST",
-      image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=2000"
-    },
-    {
-      name: "AI Infrastructure Hackathon",
-      date: "July 28, 2026",
-      location: "TBD - Bangalore",
-      description: "Building the next generation of localized LLM routing and deployment pipelines. Exclusively for members who have shipped production code.",
-      status: "LOCKED",
+      name: "More Sprints Coming Soon",
+      date: "TBD",
+      location: "Bangalore",
+      description: "We are currently organizing our next set of core sprints and hackathons. Keep an eye on our Discord for early access.",
+      status: "UPCOMING",
       image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2000"
     }
   ];

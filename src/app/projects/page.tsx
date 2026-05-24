@@ -13,8 +13,8 @@ export default function Projects() {
       description: "A custom multi-model AI routing engine designed to dynamically route queries to the most efficient LLMs in real-time.",
       tags: ["AI/ML", "TypeScript", "Routing"],
       links: {
-        website: "#",
-        github: "#"
+        website: "https://manshverse.site",
+        github: "https://github.com/sparshsharma-dev"
       }
     },
     {
@@ -23,8 +23,18 @@ export default function Projects() {
       description: "A 60FPS WebGL satellite tracking system mapping orbital debris and active satellites using raw TLE data.",
       tags: ["WebGL", "Three.js", "Math"],
       links: {
-        website: "#",
-        github: "#"
+        website: "https://orbitvoyage.vercel.app",
+        github: "https://github.com/sparshsharma-dev"
+      }
+    },
+    {
+      name: "Lexivoid",
+      creator: "Sparsh Sharma",
+      description: "Cross-references 7,000+ languages to find or synthesize words for unnamed human experiences.",
+      tags: ["Vanilla JS", "Node.js", "NLP"],
+      links: {
+        website: "https://lexivoid.vercel.app",
+        github: "https://github.com/sparshsharma-dev"
       }
     },
     {
@@ -33,15 +43,18 @@ export default function Projects() {
       description: "An advanced context-aware AI architecture and logic engine, exploring the next frontier of model orchestration.",
       tags: ["AI/ML", "Architecture", "Research"],
       links: {
-        github: "#"
+        github: "https://github.com/a3ro-dev/hybridmind"
       }
     },
     {
-      name: "Project Enigma",
-      creator: "Bangalore Core",
-      description: "An upcoming open-source cryptography learning platform built specifically for high-school hackers.",
-      tags: ["Cryptography", "Next.js", "WIP"],
-      links: {}
+      name: "Luna",
+      creator: "Akshat Kushwaha",
+      description: "A soft, supportive menstrual cycle companion with adaptive predictions and an AI companion chat.",
+      tags: ["Next.js", "Tailwind", "AI"],
+      links: {
+        website: "https://luna-tracker.a3ro.dev",
+        github: "https://github.com/a3ro-dev/luna"
+      }
     }
   ];
 

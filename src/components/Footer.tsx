@@ -25,7 +25,7 @@ export function Footer() {
           <div className="flex flex-col gap-3">
             <span className="text-white/50 mb-1">Socials</span>
             <a href="https://instagram.com/gobitsnbytes.bangalore" target="_blank" rel="noopener noreferrer" className="text-ash hover:text-white transition-colors">Instagram</a>
-            <a href="#" className="text-ash hover:text-white transition-colors">Discord</a>
+            <a href="https://discord.gg/G2Q7Cd3j" className="text-ash hover:text-white transition-colors">Discord</a>
             <a href="#" className="text-ash hover:text-white transition-colors">GitHub</a>
           </div>
           <div className="flex flex-col gap-3">

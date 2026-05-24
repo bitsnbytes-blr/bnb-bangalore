@@ -9,25 +9,11 @@ import Link from "next/link";
 export default function Blog() {
   const posts = [
     {
-      title: "Why We Forked Bangalore's Tech Scene",
-      author: "Sparsh Sharma",
-      date: "May 20, 2026",
-      excerpt: "The local ecosystem was plagued by endless tutorials, fake hackathons, and networking events for people who couldn't write a recursive function. We decided to build an alternative.",
-      category: "Manifesto"
-    },
-    {
-      title: "The Death of 'Hello World'",
-      author: "Manyatha Raj",
-      date: "May 22, 2026",
-      excerpt: "Stop building to-do apps. Start building infrastructure. A guide on transitioning from tutorial hell to shipping production software.",
-      category: "Culture"
-    },
-    {
-      title: "Architecting a 60FPS WebGL Satellite Tracker",
-      author: "Sparsh Sharma",
-      date: "May 25, 2026",
-      excerpt: "Deep dive into the math, Three.js optimizations, and TLE parsing logic that powers OrbitVoyage.",
-      category: "Engineering"
+      title: "Incoming Transmission",
+      author: "Core Team",
+      date: "TBD",
+      excerpt: "The first set of logs and architecture deep-dives are currently being drafted. We will begin broadcasting soon.",
+      category: "System"
     }
   ];
 

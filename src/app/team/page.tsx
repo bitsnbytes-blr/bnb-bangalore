@@ -16,60 +16,75 @@ export default function Team() {
       linkedin?: string;
       github?: string;
       website?: string;
+      instagram?: string;
     };
   };
 
   const bangaloreCoreTeam: TeamMember[] = [
     {
       name: "Manyatha Raj",
-      role: "Writing",
+      role: "Design & Writing",
       image: "/manyatha.jpg",
       imageClass: "object-[50%_80%] scale-100 group-hover:scale-105",
+      bio: "17-year-old content writer, poet, and storyteller. She bridges the gap between impactful copywriting and soulful storytelling, shaping narratives for Bits&Bytes.",
       links: {
         linkedin: "https://www.linkedin.com/in/manyatha-raj-mk-56b0b4411",
+        instagram: "https://www.instagram.com/manyaaa_thaaa_",
       },
     },
     {
       name: "Shashank R",
-      role: "Designing",
+      role: "Designing & Content Creation",
       image: "/shashank.jpg",
+      bio: "16-year-old designer focusing on UI/UX and futuristic aesthetics. With 2+ years of experience in visual content, he builds immersive tech-driven digital experiences.",
       links: {
         linkedin: "https://www.linkedin.com/in/shashank-r-24ba52410",
+        github: "https://github.com/shash-max",
+        instagram: "https://www.instagram.com/shxsh_valid",
       },
     },
     {
       name: "Amit Emmanuel",
-      role: "Outreach",
+      role: "Outreach & Operations",
       image: "/amit.jpg",
+      bio: "19-year-old strategist and operations lead. He engineers seamless frameworks and drives client acquisition, operating at the intersection of tech and business.",
       links: {
         linkedin: "https://www.linkedin.com/in/amith-emmanuel-7a222a378",
+        instagram: "https://www.instagram.com/archon.lane",
       },
     },
     {
       name: "Sampreeth Hegde",
-      role: "Outreach",
+      role: "Logistics & Technical",
       image: "/sampreeth.png",
+      bio: "17-year-old systems programmer specializing in compiler design. A low-level computing enthusiast and founder of Bittersweet, he handles logistics and tech operations.",
       links: {
         linkedin: "https://www.linkedin.com/in/sampreeth-hegde-b270ba411",
+        github: "https://github.com/sampreethhegde",
+        instagram: "https://www.instagram.com/sampreethhegde",
       },
     },
     {
       name: "Shyam Awasthi",
-      role: "Technical",
+      role: "Technical & Outreach",
       image: "/shyam.jpg",
       imageClass: "object-center scale-100 group-hover:scale-105",
+      bio: "Former founder of GameStreet and award-winning innovator. He operates at the intersection of tech, finance, and entrepreneurship, building systems that create lasting impact.",
       links: {
         linkedin: "https://www.linkedin.com/in/shyam-awasthi-872181227",
+        instagram: "https://www.instagram.com/s_awsthi11",
       },
     },
     {
       name: "Narthan Shetty",
-      role: "Designing",
-      image: "/narthan.jpeg",
+      role: "Design & Editing",
+      image: "/narthan.jpg",
       imageClass: "object-center scale-125 group-hover:scale-[1.3]",
-      bio: "16-year-old editor, developer & IT lead from Bangalore. School websites, an AI product in the works. Self-taught. Solo. From scratch.",
+      bio: "16-year-old self-taught editor, developer, and IT lead. From crafting school websites to building AI products from scratch.",
       links: {
         linkedin: "https://www.linkedin.com/in/narthan-shetty-7600b4411",
+        github: "https://github.com/speck-o5",
+        instagram: "https://www.instagram.com/srysly_shetty",
       },
     },
     {
@@ -77,8 +92,10 @@ export default function Team() {
       role: "Outreach",
       image: "/deeyan.jpg",
       imageClass: "object-center scale-100 group-hover:scale-105",
+      bio: "18-year-old outreach lead. He connects with sponsors and key partners, expanding the network and driving growth for Bits&Bytes.",
       links: {
         linkedin: "https://www.linkedin.com/in/a-h-deyaan-634804410",
+        instagram: "https://www.instagram.com/_de_.137",
       },
     },
   ];
@@ -148,7 +165,7 @@ export default function Team() {
                   <Terminal className="absolute top-4 right-4 w-5 h-5 text-white/30 z-20 group-hover:text-blood transition-colors" />
                   
                   <div className="relative w-full h-full">
-                    <img src="/sparsh.jpeg" alt="Sparsh Sharma" className="object-cover object-top w-full h-full grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105" />
+                    <img src="/sparsh.jpeg" alt="Sparsh Sharma" className="object-cover object-top w-full h-full grayscale-0 md:grayscale opacity-100 md:opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent opacity-80 group-hover:opacity-30 transition-opacity duration-700" />
                   </div>
                 </div>
@@ -182,7 +199,7 @@ export default function Team() {
                   <Code2 className="absolute top-4 right-4 w-5 h-5 text-white/30 z-20 group-hover:text-blood transition-colors" />
                   
                   <div className="relative w-full h-full">
-                    <img src="/rohan.jpeg" alt="Rohan Sharma" className="object-cover object-top w-full h-full grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105" />
+                    <img src="/rohan.jpeg" alt="Rohan Sharma" className="object-cover object-top w-full h-full grayscale-0 md:grayscale opacity-100 md:opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent opacity-80 group-hover:opacity-30 transition-opacity duration-700" />
                   </div>
                 </div>
@@ -202,6 +219,7 @@ export default function Team() {
                   
                   <div className="flex gap-4 mt-auto pt-6 border-t border-white/5">
                     <a href="https://www.linkedin.com/in/rohan-sharma-9b659a349" target="_blank" rel="noopener noreferrer" className="font-mono text-white/50 hover:text-white transition-colors underline decoration-white/20 hover:decoration-white underline-offset-4 uppercase text-xs md:text-sm tracking-widest">LinkedIn</a>
+                    <a href="https://www.instagram.com/rohannn__117" target="_blank" rel="noopener noreferrer" className="font-mono text-white/50 hover:text-white transition-colors underline decoration-white/20 hover:decoration-white underline-offset-4 uppercase text-xs md:text-sm tracking-widest">Instagram</a>
                   </div>
                 </div>
               </PremiumCard>
@@ -230,7 +248,7 @@ export default function Team() {
                     
                     {member.image ? (
                       <div className="relative w-full h-full overflow-hidden">
-                        <img src={member.image} alt={member.name} className={`object-cover w-full h-full grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 ${member.imageClass || "object-center scale-100 group-hover:scale-105"}`} />
+                        <img src={member.image} alt={member.name} className={`object-cover w-full h-full grayscale-0 md:grayscale opacity-100 md:opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 ${member.imageClass || "object-center scale-100 group-hover:scale-105"}`} />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/50 to-transparent opacity-80 group-hover:opacity-30 transition-opacity duration-700" />
                       </div>
                     ) : (
@@ -250,9 +268,15 @@ export default function Team() {
                       )}
                     </div>
                     {member.links && (
-                      <div className="flex gap-4 mt-8 pt-4 border-t border-white/5">
+                      <div className="flex gap-4 mt-8 pt-4 border-t border-white/5 flex-wrap">
                         {member.links.linkedin && (
                           <a href={member.links.linkedin} target="_blank" rel="noopener noreferrer" className="font-mono text-[10px] text-white/50 hover:text-blood transition-colors underline decoration-white/20 hover:decoration-blood underline-offset-4 uppercase">LinkedIn</a>
+                        )}
+                        {member.links.github && (
+                          <a href={member.links.github} target="_blank" rel="noopener noreferrer" className="font-mono text-[10px] text-white/50 hover:text-blood transition-colors underline decoration-white/20 hover:decoration-blood underline-offset-4 uppercase">GitHub</a>
+                        )}
+                        {member.links.instagram && (
+                          <a href={member.links.instagram} target="_blank" rel="noopener noreferrer" className="font-mono text-[10px] text-white/50 hover:text-blood transition-colors underline decoration-white/20 hover:decoration-blood underline-offset-4 uppercase">Instagram</a>
                         )}
                       </div>
                     )}
@@ -284,7 +308,7 @@ export default function Team() {
                     
                     {member.image ? (
                       <div className="relative w-full h-full">
-                        <img src={member.image} alt={member.name} className="object-cover object-center w-full h-full grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105" />
+                        <img src={member.image} alt={member.name} className="object-cover object-center w-full h-full grayscale-0 md:grayscale opacity-100 md:opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105" />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/50 to-transparent opacity-80 group-hover:opacity-30 transition-opacity duration-700" />
                       </div>
                     ) : (
