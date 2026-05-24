@@ -1,7 +1,6 @@
 "use client";
 
-import { useChat } from "@ai-sdk/react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, Cpu, Maximize2, Minimize2, Mic } from "lucide-react";
 import ReactMarkdown from "react-markdown";
@@ -10,12 +9,20 @@ import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
 import { cn } from "@/lib/utils";
 
+interface ChatMessage {
+  id: string;
+  role: "user" | "assistant";
+  content: string;
+}
+
 export function AIChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const { messages, input, handleInputChange, handleSubmit, status, append } = useChat();
-  const isLoading = status === "streaming" || status === "submitted";
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const abortRef = useRef<AbortController | null>(null);
 
   // Auto-scroll to bottom
   useEffect(() => {
@@ -23,6 +30,88 @@ export function AIChat() {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
+
+  const sendMessage = useCallback(async (content: string) => {
+    if (!content.trim() || isLoading) return;
+
+    const userMsg: ChatMessage = {
+      id: Date.now().toString(),
+      role: "user",
+      content: content.trim(),
+    };
+
+    const allMessages = [...messages, userMsg];
+    setMessages(allMessages);
+    setInput("");
+    setIsLoading(true);
+
+    const assistantId = (Date.now() + 1).toString();
+
+    // Add empty assistant message that we'll stream into
+    setMessages((prev) => [
+      ...prev,
+      { id: assistantId, role: "assistant", content: "" },
+    ]);
+
+    try {
+      abortRef.current = new AbortController();
+
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: allMessages.map((m) => ({
+            role: m.role,
+            content: m.content,
+          })),
+        }),
+        signal: abortRef.current.signal,
+      });
+
+      if (!res.ok) {
+        throw new Error(`API error: ${res.status}`);
+      }
+
+      const reader = res.body?.getReader();
+      if (!reader) throw new Error("No reader available");
+
+      const decoder = new TextDecoder();
+      let accumulated = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value, { stream: true });
+        accumulated += chunk;
+
+        // Update the assistant message with accumulated text
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.id === assistantId ? { ...m, content: accumulated } : m
+          )
+        );
+      }
+    } catch (err) {
+      if ((err as Error).name === "AbortError") return;
+      console.error("Chat error:", err);
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.id === assistantId
+            ? { ...m, content: "⚠️ Something went wrong. Please try again." }
+            : m
+        )
+      );
+    } finally {
+      setIsLoading(false);
+      abortRef.current = null;
+    }
+  }, [messages, isLoading]);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    sendMessage(input);
+  };
 
   return (
     <>
@@ -50,13 +139,13 @@ export function AIChat() {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className={cn(
               "fixed z-50 flex flex-col bg-[#0a0a0a] border border-white/10 overflow-hidden shadow-2xl transition-all duration-300",
-              isFullscreen 
-                ? "inset-0 w-screen h-screen max-h-screen max-w-none rounded-none" 
+              isFullscreen
+                ? "inset-0 w-screen h-screen max-h-screen max-w-none rounded-none"
                 : "bottom-20 right-4 md:bottom-24 md:right-6 w-[calc(100vw-2rem)] md:w-[400px] h-[600px] max-h-[calc(100vh-6rem)] rounded-2xl"
             )}
           >
             {/* Header */}
-            <div className="flex items-center gap-3 p-4 border-b border-white/5 bg-transparent">
+            <div className="flex items-center gap-3 p-4 border-b border-white/5 bg-transparent shrink-0">
               <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <div className="flex-1">
                 <h3 className="font-heading font-bold text-white text-sm">Avacadooh</h3>
@@ -76,16 +165,15 @@ export function AIChat() {
               {messages.length === 0 && (
                 <div className="flex flex-col space-y-3 mt-2">
                   <p className="text-sm text-ash mb-2">Ask about our team, hackathons, or how to get involved.</p>
-                  
+
                   {[
                     "Who founded Bits&Bytes and what are they working on?",
                     "What makes Bits&Bytes different from other tech clubs?",
                     "How can I join Bits&Bytes as a student developer?",
-                    "Generate a cool sci-fi robot concept for me! 🤖"
                   ].map((suggestion, idx) => (
                     <button
                       key={idx}
-                      onClick={() => append({ role: "user", content: suggestion })}
+                      onClick={() => sendMessage(suggestion)}
                       className="text-left w-fit px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs transition-colors"
                     >
                       {suggestion}
@@ -93,62 +181,59 @@ export function AIChat() {
                   ))}
                 </div>
               )}
-              
-              {messages.map((m) => {
-                const textContent = (m as unknown as { content?: string; text?: string }).content || (m as unknown as { content?: string; text?: string }).text;
-                return (
+
+              {messages.map((m) => (
+                <div
+                  key={m.id}
+                  className={cn(
+                    "flex flex-col max-w-[85%]",
+                    m.role === "user" ? "ml-auto items-end" : "mr-auto items-start"
+                  )}
+                >
                   <div
-                    key={m.id}
                     className={cn(
-                      "flex flex-col max-w-[85%]",
-                      m.role === "user" ? "ml-auto items-end" : "mr-auto items-start"
+                      "px-4 py-3 rounded-2xl text-sm",
+                      m.role === "user"
+                        ? "bg-blood/10 border border-blood/20 text-white rounded-br-sm"
+                        : "bg-white/5 border border-white/10 text-ash rounded-bl-sm"
                     )}
                   >
-                    <div
-                      className={cn(
-                        "px-4 py-3 rounded-2xl font-mono text-sm",
-                        m.role === "user"
-                          ? "bg-blood/10 border border-blood/20 text-white rounded-br-sm"
-                          : "bg-white/5 border border-white/10 text-ash rounded-bl-sm"
-                      )}
-                    >
-                      {m.role === "user" ? (
-                        textContent
-                      ) : (
-                        <div className="prose prose-invert prose-sm max-w-none prose-p:leading-relaxed prose-pre:bg-black/50 prose-pre:border prose-pre:border-white/10">
-                          <ReactMarkdown
-                            remarkPlugins={[remarkMath]}
-                            rehypePlugins={[rehypeKatex]}
-                          >
-                            {textContent || ""}
-                          </ReactMarkdown>
-                        </div>
-                      )}
-                    </div>
-                    <span className="text-[10px] text-ash/30 mt-2 font-mono uppercase tracking-widest">
-                      {m.role === "user" ? "User" : "System"}
-                    </span>
+                    {m.role === "user" ? (
+                      m.content
+                    ) : (
+                      <div className="prose prose-invert prose-sm max-w-none prose-p:leading-relaxed prose-pre:bg-black/50 prose-pre:border prose-pre:border-white/10">
+                        <ReactMarkdown
+                          remarkPlugins={[remarkMath]}
+                          rehypePlugins={[rehypeKatex]}
+                        >
+                          {m.content || ""}
+                        </ReactMarkdown>
+                      </div>
+                    )}
                   </div>
-                );
-              })}
-              
-              {isLoading && (
+                  <span className="text-[10px] text-ash/30 mt-2 font-mono uppercase tracking-widest">
+                    {m.role === "user" ? "You" : "Avacadooh"}
+                  </span>
+                </div>
+              ))}
+
+              {isLoading && messages[messages.length - 1]?.content === "" && (
                 <div className="flex items-center gap-2 text-ash/50 mr-auto">
                   <div className="w-1.5 h-1.5 rounded-full bg-blood animate-bounce" style={{ animationDelay: '0ms' }} />
                   <div className="w-1.5 h-1.5 rounded-full bg-blood animate-bounce" style={{ animationDelay: '150ms' }} />
                   <div className="w-1.5 h-1.5 rounded-full bg-blood animate-bounce" style={{ animationDelay: '300ms' }} />
                 </div>
               )}
-              
+
               <div ref={messagesEndRef} />
             </div>
 
             {/* Input Form */}
-            <form onSubmit={handleSubmit} className="p-4 bg-[#0a0a0a]">
+            <form onSubmit={handleSubmit} className="p-4 bg-[#0a0a0a] shrink-0">
               <div className="relative flex items-center">
                 <input
                   value={input}
-                  onChange={handleInputChange}
+                  onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask anything..."
                   className="w-full bg-white/5 border border-white/10 rounded-3xl py-3 pl-4 pr-20 text-sm text-white placeholder:text-ash/50 focus:outline-none focus:border-white/20 transition-all"
                 />

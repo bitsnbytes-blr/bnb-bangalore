@@ -17,6 +17,7 @@ export function Navbar() {
     { name: "Events", href: "/events" },
     { name: "Blog", href: "/blog" },
     { name: "Team", href: "/team" },
+    { name: "CoC", href: "/coc" },
   ];
 
   return (
