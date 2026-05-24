@@ -3,7 +3,7 @@
 import { useChat } from "@ai-sdk/react";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Terminal, X, Send, Cpu, Maximize2, Minimize2, Minus, Mic } from "lucide-react";
+import { X, Send, Cpu, Maximize2, Minimize2, Mic } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
