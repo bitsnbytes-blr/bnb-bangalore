@@ -3,6 +3,7 @@ import { streamText } from 'ai';
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
+export const runtime = 'edge';
 
 const mistral = createMistral({
   apiKey: process.env.MISTRAL_API_KEY || '',

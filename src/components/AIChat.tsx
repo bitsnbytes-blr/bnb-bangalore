@@ -85,7 +85,7 @@ export function AIChat() {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-6">
+            <div className="flex-1 min-h-0 overflow-y-auto p-4 space-y-6">
               {messages.length === 0 && (
                 <div className="flex flex-col space-y-3 mt-2">
                   <p className="text-sm text-ash mb-2">Ask about our team, hackathons, or how to get involved.</p>
