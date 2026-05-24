@@ -13,21 +13,8 @@ import { cn } from "@/lib/utils";
 export function AIChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const { messages, sendMessage, status } = useChat();
+  const { messages, input, handleInputChange, handleSubmit, status, append } = useChat();
   const isLoading = status === "streaming" || status === "submitted";
-  const [input, setInput] = useState("");
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!input.trim()) return;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    sendMessage({ role: "user", content: input } as any);
-    setInput("");
-  };
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom
@@ -98,7 +85,7 @@ export function AIChat() {
                   ].map((suggestion, idx) => (
                     <button
                       key={idx}
-                      onClick={() => setInput(suggestion)}
+                      onClick={() => append({ role: "user", content: suggestion })}
                       className="text-left w-fit px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs transition-colors"
                     >
                       {suggestion}
