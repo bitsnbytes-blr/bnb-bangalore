@@ -10,6 +10,20 @@ const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jet
 export const metadata: Metadata = {
   title: "bits&bytes Bangalore",
   description: "Your city's fork is no longer unclaimed. We are here.",
+  keywords: [
+    "bits and bytes", "bits&bytes", "gobitsnbytes", "go bits and bytes", "bits and bytes bangalore",
+    "bits&bytes bangalore", "bnb bangalore", "bnb", "sparsh sharma", "rohan sharma", "akshat kushwaha",
+    "yash", "aadrika", "basavaraj", "manyatha", "shashank", "amit", "shyam", "sampreeth", "deyaan",
+    "teenage builders", "high school hackers", "student developers", "hackathons in bangalore",
+    "bangalore tech community", "youth tech community", "high-agency youth", "gen z tech",
+    "manshverse", "orbitvoyage", "anveshana program", "prayoga labs", "student hackathons",
+    "coding community bangalore", "software development", "tech meetups bangalore", "web3", "ai",
+    "teen coders", "builders in bangalore", "indie hackers", "tech events bangalore", "gobitsnbytes.org",
+    "programming community", "nextjs", "react", "typescript", "full stack developers", "open source"
+  ],
+  verification: {
+    google: "pjeNo071rEkgdyNswKaJVAlgOTAS8F4Eh57f1pWklKc",
+  },
 };
 
 export default function RootLayout({

@@ -8,12 +8,14 @@ import { CalendarDays, MapPin } from "lucide-react";
 export default function Events() {
   const events = [
     {
-      name: "More Sprints Coming Soon",
-      date: "TBD",
-      location: "Bangalore",
-      description: "We are currently organizing our next set of core sprints and hackathons. Keep an eye on our Discord for early access.",
+      name: "bits&bytes AI & Web Dev Workshop",
+      date: "June 24th, 2026",
+      location: "Taproot PU College (Herohalli)",
+      address: "THE GREAT EASTERN PU COLLEGE, No. 18, Lingadhirahalli, D Group Employees Layout, Vishwaneedam Post, Magadi Main Rd, Herohalli, Bengaluru 560091",
+      description: "Our first major offline workshop. Introduction by Manyatha, followed by a deep dive into logical coding and real-world AI applications with Sparsh. Featuring a special online session on nanotech and robotics by Rohan and Shyam.",
       status: "UPCOMING",
-      image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2000"
+      image: "/cyber_event.png",
+      link: "/events/register"
     }
   ];
 
@@ -80,9 +82,21 @@ export default function Events() {
                       </div>
                     </div>
 
-                    <p className="font-mono text-ash/80 leading-relaxed max-w-xl">
+                    {event.address && (
+                      <p className="font-mono text-xs text-ash/60 mb-6 italic">
+                        {event.address}
+                      </p>
+                    )}
+                    <p className="font-mono text-ash/80 leading-relaxed max-w-xl mb-8">
                       {event.description}
                     </p>
+                    {event.link && (
+                      <div className="mt-auto pt-6 border-t border-white/5">
+                        <a href={event.link} className="inline-block bg-blood text-white font-mono text-sm px-6 py-2 uppercase tracking-widest hover:bg-white hover:text-black transition-colors">
+                          Register Now
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </PremiumCard>
               </ScrollReveal>

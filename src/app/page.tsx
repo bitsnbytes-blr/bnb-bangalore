@@ -35,7 +35,7 @@ export default function Home() {
             </ScrollReveal>
             <ScrollReveal delay={0.3}>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/apply">
+                <Link href="/events/register">
                   <AnimatedButton variant="primary">Apply for Sprints</AnimatedButton>
                 </Link>
                 <Link href="/blog">
