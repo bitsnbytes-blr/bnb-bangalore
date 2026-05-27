@@ -14,8 +14,16 @@ export default function Events() {
       address: "THE GREAT EASTERN PU COLLEGE, No. 18, Lingadhirahalli, D Group Employees Layout, Vishwaneedam Post, Magadi Main Rd, Herohalli, Bengaluru 560091",
       description: "Our first major offline workshop. Introduction by Manyatha, followed by a deep dive into logical coding and real-world AI applications with Sparsh. Featuring a special online session on nanotech and robotics by Rohan and Shyam.",
       status: "UPCOMING",
-      image: "/v1.png",
+      image: "/enhanced_college.png",
       link: "/events/register"
+    },
+    {
+      name: "More Sprints Coming Soon",
+      date: "TBD",
+      location: "Bangalore",
+      description: "We are currently organizing our next set of core sprints and hackathons. Keep an eye on our Discord for early access.",
+      status: "WAITLIST",
+      image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2000"
     }
   ];
 
